@@ -1,0 +1,223 @@
+:root {
+    --color-fondo: #1b1818;
+    --color-texto: #FF1A1A;
+    --color-btn-txt: #F5F5F5;
+    --color-botones: #400000;
+    --color-border: #D90000;
+    --color-hover: #B00000;
+    --font-h1: "Permanent Marker";
+    --font-text1: "Indie Flower";
+    --font-text2: "Dancing Script";
+}  
+
+/* Asegurar box-sizing consistente */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--color-fondo);
+    background-image: url(bg-img.jpg);
+    background-size: cover;
+    background-position: left;
+    overflow: hidden;
+}
+
+#game-container {
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#score {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 0 0 5px var(--color-texto), 0 0 10px var(--color-texto), 0 0 20px var(--color-texto);
+}
+
+/* Botones de opciones (Start y Home) */
+#start-btn, #home-btn {
+    padding: 5px 30px;
+    width: 160px;
+    background-color: var(--color-botones);
+    color: var(--color-btn-txt);
+    text-shadow: 0 0 10px var(--color-texto), 0 0 20px var(--color-texto), 0 0 40px var(--color-texto), 0 0 60px var(--color-texto);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    cursor: pointer;
+    font: normal 600 1.5rem var(--font-text1), cursive;
+    
+}
+
+#start-btn:hover, #home-btn:hover {
+    background-color: var(--color-hover);
+    text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white, 0 0 100px white;
+}
+
+#home-btn {
+    margin-left: 10px;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 85px);
+    grid-template-rows: repeat(4, 85px);
+    width: 340px;
+    height: 340px;
+    margin: 20px auto;
+    gap: 0;
+    padding: 0;
+    border: none;
+    position: relative; /* Padre para #game-over */
+}
+
+.tile {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 2px solid var(--color-fondo);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 5px var(--color-texto), 0 0 10px var(--color-texto), 0 0 20px var(--color-texto);
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+.tile.red-transition {
+    transition: background-color 1s ease;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado exacto en el grid */
+    font-family: var(--font-h1);
+    font-size: 48px; /* 32px por defecto */
+    color: white;
+    text-shadow: 0 0 5px var(--color-texto), 0 0 10px var(--color-texto), 0 0 20px var(--color-texto);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Texto centrado dentro del recuadro */
+    width: 80%; /* Limita el ancho */
+    max-width: 300px; /* Máximo para no exceder el grid */
+    z-index: 10; /* Asegura que esté sobre las tiles */
+}
+
+#final-time {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 5px var(--color-texto), 0 0 10px var(--color-texto), 0 0 20px var(--color-texto);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Texto centrado dentro del recuadro */
+    width: 80%; /* Limita el ancho */
+    max-width: 300px; /* Máximo para no exceder el grid */
+    z-index: 10; /* Asegura que esté sobre las tiles */
+}
+
+/* Media query para móviles */
+@media (max-width: 600px) {
+    #game-over {
+        font-size: 2rem; /* 24px en móviles */
+        line-height: 1.2; /* Espacio para "Game" y "Over" */
+        width: 70%; /* Ajuste para móviles */
+        max-width: 250px; /* Ligeramente más pequeño en móviles */
+    }
+}
+
+#home-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#home-screen h1 {
+    font: normal 4rem var(--font-h1), cursive; 
+    margin-bottom: 1rem;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red, 0 0 60px red;
+}
+
+/* Botones de modos */
+#home-screen button:not(.bpm-btn) {
+    font-size: 20px;
+    padding: 5px 30px;
+    width: 200px;
+    margin: 10px;
+    background-color: var(--color-botones);
+    color: var(--color-btn-txt);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    cursor: pointer;
+    font: normal 600 1.5rem var(--font-text1), cursive;
+    text-shadow: 0 0 10px var(--color-texto), 0 0 20px var(--color-texto), 0 0 40px var(--color-texto), 0 0 60px var(--color-texto);
+}
+
+#home-screen button:not(.bpm-btn):hover {
+    background-color: var(--color-hover);
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 40px white, 0 0 60px white;
+}
+
+#highscore-display {
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 5px var(--color-texto), 0 0 10px var(--color-texto), 0 0 20px var(--color-texto);
+    margin-bottom: 10px;
+}
+
+#bpm-selector {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#bpm-selector h2 {
+    color: var(--color-btn-txt);
+    text-shadow: 0 0 10px var(--color-texto), 0 0 20px var(--color-texto), 0 0 40px var(--color-texto), 0 0 60px var(--color-texto);
+    margin-bottom: 10px;
+    font: normal 700 24px var(--font-h1), cursive;
+}
+
+/* Botones de BPM */
+.bpm-btn {
+    font: normal 600 20px var(--font-text1), cursive;
+    padding: 5px 30px;
+    width: 180px;
+    background-color: var(--color-botones);
+    color: var(--color-btn-txt);
+    text-shadow: 0 0 10px var(--color-texto), 0 0 20px var(--color-texto), 0 0 40px var(--color-texto), 0 0 60px var(--color-texto);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bpm-btn:hover {
+    background-color: var(--color-hover);
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 40px white, 0 0 60px white;
+}
